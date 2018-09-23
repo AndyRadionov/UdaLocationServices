@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">UdaLocationServices</string>
+    <string name="location_text">Location goes here</string>
+</resources>
