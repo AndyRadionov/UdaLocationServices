@@ -3,6 +3,7 @@ package io.github.andyradionov.udalocationservices;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
     private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS =
             UPDATE_INTERVAL_IN_MILLISECONDS / 2;
+    private static final long ACTIVITIES_UPDATE_INTERVAL_IN_MILLISECONDS = 1000;
 
     // Keys for storing activity state in the Bundle.
     private final static String KEY_REQUESTING_LOCATION_UPDATES = "requesting-location-updates";
@@ -330,7 +332,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //todo mActivityRecognitionClient.requestActivityUpdates(180_000L, )
+        Intent intent = new Intent( this, DetectedActivitiesIntentService.class );
+        PendingIntent pendingIntent = PendingIntent.getService( this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT );
+
+        mActivityRecognitionClient.requestActivityUpdates(ACTIVITIES_UPDATE_INTERVAL_IN_MILLISECONDS, pendingIntent);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        Intent intent = new Intent( this, DetectedActivitiesIntentService.class );
+        PendingIntent pendingIntent = PendingIntent.getService( this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT );
+        mActivityRecognitionClient.removeActivityUpdates(pendingIntent);
     }
 
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -475,7 +489,5 @@ public class MainActivity extends AppCompatActivity {
             }
             mDetectedActivities.setText(sb.toString());
         }
-
-
     }
 }
