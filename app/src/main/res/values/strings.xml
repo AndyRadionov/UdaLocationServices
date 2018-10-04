@@ -27,4 +27,6 @@
     <string name="unknown">Unknown activity</string>
     <string name="walking">Walking</string>
     <string name="unidentifiable_activity">Unidentifiable activity: %1$d</string>
+    <string name="start_location_activity">Start Location Activity</string>
+    <string name="start_recognition_activity">Start Recognition Activity</string>
 </resources>
