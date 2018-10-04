@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    tools:context=".LocationsActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -92,10 +92,5 @@
             android:text="@string/location_settings_inadequate_warning"
             android:visibility="invisible" />
 
-        <TextView
-            android:id="@+id/detected_activities"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/detected_activities_title"/>
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
