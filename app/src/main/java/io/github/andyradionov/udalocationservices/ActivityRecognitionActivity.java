@@ -35,7 +35,8 @@ public class ActivityRecognitionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recognition);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Activity Recognition");
 
         mDetectedActivities = findViewById(R.id.detected_activities);

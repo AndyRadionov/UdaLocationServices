@@ -95,8 +95,9 @@ public class LocationsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_locations);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         getSupportActionBar().setTitle("Locations");
 
         mStartUpdatesButton = findViewById(R.id.start_updates_button);
