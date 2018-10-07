@@ -1,4 +1,4 @@
-package io.github.andyradionov.udalocationservices;
+package io.github.andyradionov.udalocationservices.recognition;
 
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -19,6 +19,9 @@ import com.google.android.gms.location.ActivityRecognitionClient;
 import com.google.android.gms.location.DetectedActivity;
 
 import java.util.ArrayList;
+
+import io.github.andyradionov.udalocationservices.Constants;
+import io.github.andyradionov.udalocationservices.R;
 
 public class ActivityRecognitionActivity extends AppCompatActivity {
 

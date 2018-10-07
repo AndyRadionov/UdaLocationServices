@@ -1,4 +1,4 @@
-package io.github.andyradionov.udalocationservices;
+package io.github.andyradionov.udalocationservices.recognition;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -10,7 +10,8 @@ import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import io.github.andyradionov.udalocationservices.Constants;
 
 /**
  * @author Andrey Radionov

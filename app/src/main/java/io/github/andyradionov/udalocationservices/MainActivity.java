@@ -8,6 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+import io.github.andyradionov.udalocationservices.location.LocationsActivity;
+import io.github.andyradionov.udalocationservices.recognition.ActivityRecognitionActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();

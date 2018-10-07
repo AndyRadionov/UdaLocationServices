@@ -1,4 +1,4 @@
-package io.github.andyradionov.udalocationservices;
+package io.github.andyradionov.udalocationservices.location;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,9 +24,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
-import com.google.android.gms.location.ActivityRecognition;
-import com.google.android.gms.location.ActivityRecognitionClient;
-import com.google.android.gms.location.DetectedActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -45,6 +41,9 @@ import com.google.android.gms.tasks.Task;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import io.github.andyradionov.udalocationservices.BuildConfig;
+import io.github.andyradionov.udalocationservices.R;
 
 public class LocationsActivity extends AppCompatActivity {
 
