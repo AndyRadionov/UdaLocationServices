@@ -22,25 +22,25 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button startLocations = findViewById(R.id.start_location_activity);
-        Button startRecognition = findViewById(R.id.start_recognition_activity);
-        Button startGeofencing = findViewById(R.id.start_geofencing_activity);
+        Button startLocationsButton = findViewById(R.id.start_location_activity);
+        Button startRecognitionButton = findViewById(R.id.start_recognition_activity);
+        Button startGeofencingButton = findViewById(R.id.start_geofencing_activity);
 
-        startLocations.setOnClickListener(new View.OnClickListener() {
+        startLocationsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, LocationsActivity.class));
             }
         });
 
-        startRecognition.setOnClickListener(new View.OnClickListener() {
+        startRecognitionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, ActivityRecognitionActivity.class));
             }
         });
 
-        startGeofencing.setOnClickListener(new View.OnClickListener() {
+        startGeofencingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, ActivityRecognitionActivity.class));
