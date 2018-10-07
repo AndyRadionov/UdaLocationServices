@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button startLocations = findViewById(R.id.start_location_activity);
         Button startRecognition = findViewById(R.id.start_recognition_activity);
+        Button startGeofencing = findViewById(R.id.start_geofencing_activity);
 
         startLocations.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,6 +34,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         startRecognition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ActivityRecognitionActivity.class));
+            }
+        });
+
+        startGeofencing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, ActivityRecognitionActivity.class));
