@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.location.ActivityRecognition;
@@ -22,7 +24,13 @@ public class ActivityRecognitionActivity extends AppCompatActivity {
 
     private static final String TAG = ActivityRecognitionActivity.class.getSimpleName();
 
-    private static final long ACTIVITIES_UPDATE_INTERVAL_IN_MILLISECONDS = 1000;
+    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 1000;
+    private static final String KEY_REQUESTING_DETECTION_UPDATES = "request_detection";
+
+    private boolean mRequestingDetectionUpdates;
+
+    private Button mStartUpdatesButton;
+    private Button mStopUpdatesButton;
 
     private ActivityRecognitionClient mActivityRecognitionClient;
     private ActivityDetectionBroadcastReceiver mActivityDetectionReceiver;
@@ -39,11 +47,14 @@ public class ActivityRecognitionActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Activity Recognition");
 
+        mStartUpdatesButton = findViewById(R.id.start_updates_button);
+        mStopUpdatesButton = findViewById(R.id.stop_updates_button);
         mDetectedActivities = findViewById(R.id.detected_activities);
 
         mActivityRecognitionClient = ActivityRecognition.getClient(this);
         mActivityDetectionReceiver = new ActivityDetectionBroadcastReceiver();
 
+        updateValuesFromBundle(savedInstanceState);
     }
 
     @Override
@@ -56,25 +67,69 @@ public class ActivityRecognitionActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        removeActivityUpdates();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mActivityDetectionReceiver);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Intent intent = new Intent(this, DetectedActivitiesIntentService.class);
-        PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        mActivityRecognitionClient.requestActivityUpdates(ACTIVITIES_UPDATE_INTERVAL_IN_MILLISECONDS, pendingIntent);
+        if (mRequestingDetectionUpdates) requestActivityUpdates();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Intent intent = new Intent(this, DetectedActivitiesIntentService.class);
-        PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        removeActivityUpdates();
+    }
 
-        mActivityRecognitionClient.removeActivityUpdates(pendingIntent);
+    public void startUpdatesButtonHandler(View view) {
+        mRequestingDetectionUpdates = true;
+        updateUi();
+        requestActivityUpdates();
+    }
+
+    public void stopUpdatesButtonHandler(View view) {
+        mRequestingDetectionUpdates = false;
+        updateUi();
+        removeActivityUpdates();
+    }
+
+    private void updateValuesFromBundle(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            if (savedInstanceState.keySet().contains(KEY_REQUESTING_DETECTION_UPDATES)) {
+                mRequestingDetectionUpdates = savedInstanceState.getBoolean(
+                        KEY_REQUESTING_DETECTION_UPDATES);
+                updateUi();
+            }
+        }
+    }
+
+    private void updateUi() {
+        if (mRequestingDetectionUpdates) {
+            mDetectedActivities.setVisibility(View.VISIBLE);
+            mStartUpdatesButton.setEnabled(false);
+            mStopUpdatesButton.setEnabled(true);
+        } else {
+            mDetectedActivities.setVisibility(View.INVISIBLE);
+            mStartUpdatesButton.setEnabled(true);
+            mStopUpdatesButton.setEnabled(false);
+        }
+    }
+
+    private void requestActivityUpdates() {
+        mActivityRecognitionClient.requestActivityUpdates(UPDATE_INTERVAL_IN_MILLISECONDS,
+                getActivityDetectionPendingIntent());
+
+    }
+
+    private void removeActivityUpdates() {
+        mActivityRecognitionClient.removeActivityUpdates(getActivityDetectionPendingIntent());
+    }
+
+    private PendingIntent getActivityDetectionPendingIntent() {
+        Intent intent = new Intent(this, DetectedActivitiesIntentService.class);
+        return PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
 
