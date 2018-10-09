@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+import io.github.andyradionov.udalocationservices.geofencing.GeofencingActivity;
 import io.github.andyradionov.udalocationservices.location.LocationsActivity;
 import io.github.andyradionov.udalocationservices.recognition.ActivityRecognitionActivity;
 
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         startGeofencingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, ActivityRecognitionActivity.class));
+                startActivity(new Intent(MainActivity.this, GeofencingActivity.class));
             }
         });
     }

@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".geofencing.GeofencingActivity">
 
     <Button
-        android:text="@string/add_geofence"
         android:id="@+id/btn_add_geofence"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_height="wrap_content"
+        android:onClick="addGeofencesButtonHandler"
+        android:text="@string/add_geofence" />
+
+    <Button
+        android:id="@+id/btn_test_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="testSendNotification"
+        android:text="Test Notification" />
+</LinearLayout>

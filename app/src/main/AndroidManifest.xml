@@ -33,6 +33,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        <activity
+            android:name=".geofencing.GeofencingActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -41,8 +49,10 @@
         <service
             android:name=".recognition.DetectedActivitiesIntentService"
             android:exported="false" />
+        <service
+            android:name=".geofencing.GeofenceTransitionsIntentService"
+            android:exported="false" />
 
-        <activity android:name=".geofencing.GeofencingActivity"></activity>
     </application>
 
 </manifest>
